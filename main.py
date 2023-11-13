@@ -1,7 +1,9 @@
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, render_template, send_from_directory, request
+from model import get_embeddings, get_similar_documents, get_similar_chunks, get_db
 
 app = Flask(__name__)
 
+db = get_db("./emb", get_embeddings())
 
 @app.route("/")
 def home():
@@ -10,7 +12,10 @@ def home():
 
 @app.route("/get")
 def get_bot_response():
-    return "Réponse"
+    query = request.args.get('msg')
+    documents = get_similar_documents(query, db)
+    chunks = get_similar_chunks(documents)
+    return list(chunks)
 
 
 @app.route('/static/<path:path>')
