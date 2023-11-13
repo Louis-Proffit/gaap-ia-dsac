@@ -1,6 +1,6 @@
 from typing import Generator, Iterable
 
-from langchain.document_loaders import PyPDFLoader
+from langchain.document_loaders import TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from model import get_embeddings
 from langchain.schema.embeddings import Embeddings
@@ -14,7 +14,7 @@ def generate_paths(regex: str) -> list[str]:
 
 
 def path_to_documents(path: str) -> list[Document]:
-    loader = PyPDFLoader(path)
+    loader = TextLoader(path, encoding='UTF-8')
     return loader.load()
 
 
@@ -38,4 +38,4 @@ def main(files_regex: str, output_path: str):
 
 
 if __name__ == "__main__":
-    main("data/*.pdf", "./embeddings")
+    main("data/*.txt", "./embeddings")

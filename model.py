@@ -5,8 +5,20 @@ from langchain.vectorstores import Chroma
 from langchain.schema.document import Document
 from langchain.schema.embeddings import Embeddings
 from langchain.embeddings import HuggingFaceEmbeddings
+from transformers import pipeline, Conversation
+from dotenv import load_dotenv
 
-EMBEDDINGS_MODEL = 'sentence-transformers/all-MiniLM-L6-v2'
+load_dotenv()
+
+EMBEDDINGS_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+CONVERSATIONAL_MODEL = "facebook/blenderbot-1B-distill"
+
+def get_pipeline():
+    return pipeline("conversational", model=CONVERSATIONAL_MODEL)
+
+
+def get_conversation():
+    return Conversation()
 
 
 def get_db(path: str, embeddings: Embeddings) -> Chroma:
