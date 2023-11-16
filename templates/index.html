@@ -15,11 +15,12 @@
         <div class="boxed-inner">
             <div id="chatbox">
                 <p class="botText">
-                    <span>Bonjour, je suis le chatbot de la DSAC</span>
+                    <span>Bonjour, je suis le chatbot de la DSAC. Posez-moi une question !</span>
                 </p>
             </div>
             <div id="userInput">
-                <label for="textInput" hidden="hidden"></label><input id="textInput" type="text" name="msg" placeholder="Message" />
+                <label for="textInput" hidden="hidden"></label><input id="textInput" type="text" name="msg"
+                                                                      placeholder="Message"/>
             </div>
         </div>
         <script>
@@ -32,16 +33,17 @@
                 $("#chatbox").append(userHtml);
                 document
                     .getElementById("userInput")
-                    .scrollIntoView({ block: "start", behavior: "smooth" });
-                $.get("/get", { msg: rawText }).done(function (data) {
+                    .scrollIntoView({block: "start", behavior: "smooth"});
+                $.get("/get", {msg: rawText}).done(function (data) {
                     console.log(data)
                     const botHtml = '<p class="botText"><span>' + data + "</span></p>";
                     $("#chatbox").append(botHtml);
                     document
                         .getElementById("userInput")
-                        .scrollIntoView({ block: "start", behavior: "smooth" });
+                        .scrollIntoView({block: "start", behavior: "smooth"});
                 });
             }
+
             textInput.keypress(function (e) {
                 if (e.which === 13) {
                     getBotResponse();

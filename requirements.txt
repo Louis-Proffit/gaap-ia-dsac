@@ -6,3 +6,6 @@ torchaudio
 langchain
 python-dotenv
 openai
+pypdf
+sentence-transformers
+chromadb

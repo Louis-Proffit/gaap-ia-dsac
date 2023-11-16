@@ -1,12 +1,14 @@
 from typing import Generator, Iterable
-
-from langchain.document_loaders import TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from model import get_embeddings
 from langchain.schema.embeddings import Embeddings
 from langchain.vectorstores import Chroma
 from langchain.schema.document import Document
+from langchain.document_loaders import PyPDFLoader
 import glob
+
+CHUNK_SIZE = 10000
+CHUNK_OVERLAP_SIZE = 2000
 
 
 def generate_paths(regex: str) -> list[str]:
@@ -14,11 +16,12 @@ def generate_paths(regex: str) -> list[str]:
 
 
 def path_to_documents(path: str) -> list[Document]:
-    loader = TextLoader(path, encoding='UTF-8')
+    loader = PyPDFLoader(path)
     return loader.load()
 
 
-def documents_to_chunks(documents: list[Document], chunk_size=2000, chunk_overlap=500) -> Iterable[Document]:
+def documents_to_chunks(documents: list[Document], chunk_size=CHUNK_SIZE, chunk_overlap=CHUNK_OVERLAP_SIZE) -> Iterable[
+    Document]:
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
     return text_splitter.split_documents(documents)
 
@@ -38,4 +41,4 @@ def main(files_regex: str, output_path: str):
 
 
 if __name__ == "__main__":
-    main("data/*.txt", "./embeddings")
+    main("data/*.pdf", "./embeddings")
