@@ -1,8 +1,5 @@
 Flask
-transformers
 torch
-torchvision
-torchaudio
 langchain
 python-dotenv
 openai

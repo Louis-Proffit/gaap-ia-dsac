@@ -1,4 +1,4 @@
-from typing import Generator, Iterable
+from typing import Iterable
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from model import get_embeddings
 from langchain.schema.embeddings import Embeddings

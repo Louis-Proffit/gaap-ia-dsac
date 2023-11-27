@@ -1,6 +1,9 @@
 from flask import Flask, render_template, send_from_directory, request
-from model import get_embeddings, get_similar_documents, get_similar_chunks, get_db, get_pipeline, get_conversation
+from model import get_embeddings, get_similar_documents, get_db
 from openai import OpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 
