@@ -4,5 +4,4 @@ langchain
 python-dotenv
 openai
 pypdf
-sentence-transformers
-chromadb
+llama_index
